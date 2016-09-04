@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="nice_toast_padding">14dp</dimen>
+    <dimen name="nice_toast_stroke_width">2dp</dimen>
+    <dimen name="nice_toast_corner_radius">6dp</dimen>
+    <dimen name="nice_toast_icon_padding">10dp</dimen>
+    <dimen name="nice_toast_y_offset">40dp</dimen>
+</resources>

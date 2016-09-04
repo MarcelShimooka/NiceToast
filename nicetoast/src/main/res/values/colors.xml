@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="nice_toast_background">#ffffff</color>
+    <color name="nice_toast_default">#4aa4d7</color>
+    <color name="nice_toast_success">#25ae88</color>
+    <color name="nice_toast_warning">#fe7800</color>
+    <color name="nice_toast_error">#d75a4a</color>
+</resources>

@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">NiceToast</string>
+
+    <string name="simple_message">Simple message</string>
+    <string name="success_message">Success message</string>
+    <string name="warning_message">Warning message</string>
+    <string name="error_message">Error message</string>
+    <string name="top_message">Message on top</string>
+    <string name="middle_message">Message on middle</string>
+    <string name="long_duration_message">Long duration message</string>
+</resources>
