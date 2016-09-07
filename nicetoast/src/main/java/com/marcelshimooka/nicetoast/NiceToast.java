@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Marcel Shimooka
- *
+ * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -18,7 +18,9 @@ package com.marcelshimooka.nicetoast;
 
 import android.content.Context;
 import android.support.annotation.IntDef;
+import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +31,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * A simple custom toast
  */
-public class NiceToast {
+public class NiceToast extends Toast {
 
     //region FIELDS
     public static final int THEME_DEFAULT = 0;
@@ -45,37 +47,40 @@ public class NiceToast {
     public static final int POSITION_BOTTOM = Gravity.BOTTOM;
 
     private Context mContext;
-    private int mMessageResId;
-    private int mIconResId;
-    private int mTextColorId;
-    private int mBackgroundResId;
+    private String mMessage;
+    private int mIconResource;
+    private int mTextColorResource;
+    private int mBackgroundResource;
     @Theme
-    private int mThemeId;
-    @Position
-    private int mPosition;
+    private int mTheme;
     @Duration
     private int mDuration;
+    @Position
+    private int mPosition;
 
-    private Toast mToast;
     private TextView tvwMessage;
     //endregion
 
     //region CONSTRUCTORS
-    public NiceToast(Context context, int messageResId) {
+    public NiceToast(Context context) {
+        super(context);
         mContext = context;
         tvwMessage = new TextView(mContext);
-        mToast = new Toast(mContext);
-
-        mMessageResId = messageResId;
-        tvwMessage.setGravity(Gravity.CENTER_VERTICAL);
-        mPosition = POSITION_BOTTOM;
-        mDuration = DURATION_SHORT;
+        setDefaultValues();
     }
     //endregion
 
     //region PROPERTIES
+    public Context getContext() {
+        return mContext;
+    }
+
+    public void setMessage(String message) {
+        this.mMessage = message;
+    }
+
     public void setThemeId(@Theme int themeId) {
-        this.mThemeId = themeId;
+        this.mTheme = themeId;
     }
 
     public void setPosition(@Position int position) {
@@ -93,49 +98,58 @@ public class NiceToast {
     public void show() {
         applyTheme();
 
-        tvwMessage.setText(mMessageResId);
-        mToast.setGravity(mPosition, 0, getYOffset());
-        mToast.setDuration(mDuration);
-        mToast.setView(tvwMessage);
-        mToast.show();
+        if (!TextUtils.isEmpty(mMessage)) {
+            tvwMessage.setText(mMessage);
+        }
+
+        super.setGravity(mPosition, 0, getCustomYOffset());
+        super.setDuration(mDuration);
+        super.setView(tvwMessage);
+        super.show();
     }
     //endregion
 
     //region PRIVATE METHODS
+    private void setDefaultValues() {
+        tvwMessage.setGravity(Gravity.CENTER_VERTICAL);
+        mDuration = DURATION_SHORT;
+        mPosition = POSITION_BOTTOM;
+    }
+
     private void applyTheme() {
-        switch (mThemeId) {
+        switch (mTheme) {
             case THEME_DEFAULT:
-                mIconResId = 0;
-                mTextColorId = ContextCompat.getColor(mContext, R.color.nice_toast_default);
-                mBackgroundResId = R.drawable.nice_toast_bg_default;
+                mIconResource = 0;
+                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_default);
+                mBackgroundResource = R.drawable.nice_toast_bg_default;
                 break;
             case THEME_SUCCESS:
-                mIconResId = R.drawable.ic_nice_toast_success;
-                mTextColorId = ContextCompat.getColor(mContext, R.color.nice_toast_success);
-                mBackgroundResId = R.drawable.nice_toast_bg_success;
+                mIconResource = R.drawable.ic_nice_toast_success;
+                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_success);
+                mBackgroundResource = R.drawable.nice_toast_bg_success;
                 break;
             case THEME_WARNING:
-                mIconResId = R.drawable.ic_nice_toast_warning;
-                mTextColorId = ContextCompat.getColor(mContext, R.color.nice_toast_warning);
-                mBackgroundResId = R.drawable.nice_toast_bg_warning;
+                mIconResource = R.drawable.ic_nice_toast_warning;
+                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_warning);
+                mBackgroundResource = R.drawable.nice_toast_bg_warning;
                 break;
             case THEME_ERROR:
-                mIconResId = R.drawable.ic_nice_toast_error;
-                mTextColorId = ContextCompat.getColor(mContext, R.color.nice_toast_error);
-                mBackgroundResId = R.drawable.nice_toast_bg_error;
+                mIconResource = R.drawable.ic_nice_toast_error;
+                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_error);
+                mBackgroundResource = R.drawable.nice_toast_bg_error;
                 break;
         }
 
-        if (mIconResId != 0) {
-            tvwMessage.setCompoundDrawablesWithIntrinsicBounds(mIconResId, 0, 0, 0);
+        if (mIconResource != 0) {
+            tvwMessage.setCompoundDrawablesWithIntrinsicBounds(mIconResource, 0, 0, 0);
             tvwMessage.setCompoundDrawablePadding(mContext.getResources().getDimensionPixelSize(R.dimen.nice_toast_icon_padding));
         }
 
-        tvwMessage.setTextColor(mTextColorId);
-        tvwMessage.setBackgroundResource(mBackgroundResId);
+        tvwMessage.setTextColor(mTextColorResource);
+        tvwMessage.setBackgroundResource(mBackgroundResource);
     }
 
-    private int getYOffset() {
+    private int getCustomYOffset() {
         int offset = 0;
 
         if (mPosition != POSITION_CENTER) {
@@ -169,22 +183,57 @@ public class NiceToast {
     public static class Builder {
         private NiceToast instance;
 
-        public Builder(Context context, int messageResId) {
-            instance = new NiceToast(context, messageResId);
+        public Builder(Context context) {
+            instance = new NiceToast(context);
         }
 
-        public Builder theme(@Theme int themeId) {
+        /**
+         * Set the message using the given resource id.
+         *
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder withMessage(@StringRes int messageId) {
+            instance.setMessage(instance.getContext().getString(messageId));
+            return this;
+        }
+
+        /**
+         * Set the message displayed in the {@link NiceToast}.
+         *
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder withMessage(String message) {
+            instance.setMessage(message);
+            return this;
+        }
+
+        /**
+         * Set the theme used in the {@link NiceToast}.
+         *
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder withTheme(@Theme int themeId) {
             instance.setThemeId(themeId);
             return this;
         }
 
-        public Builder position(@Position int position) {
-            instance.setPosition(position);
+        /**
+         * Set the duration used in the {@link NiceToast}.
+         *
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder withDuration(@Duration int duration) {
+            instance.setDuration(duration);
             return this;
         }
 
-        public Builder duration(@Duration int duration) {
-            instance.setDuration(duration);
+        /**
+         * Set the position used in the {@link NiceToast}.
+         *
+         * @return This Builder object to allow for chaining of calls to set methods
+         */
+        public Builder withPosition(@Position int position) {
+            instance.setPosition(position);
             return this;
         }
 

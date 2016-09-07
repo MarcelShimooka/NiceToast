@@ -44,41 +44,50 @@ public class DemoActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.activity_demo_btn_simple_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.simple_message).build().show();
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.simple_message)
+                        .build()
+                        .show();
                 break;
             case R.id.activity_demo_btn_success_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.success_message)
-                        .theme(NiceToast.THEME_SUCCESS)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.success_message)
+                        .withTheme(NiceToast.THEME_SUCCESS)
                         .build()
                         .show();
                 break;
             case R.id.activity_demo_btn_warning_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.warning_message)
-                        .theme(NiceToast.THEME_WARNING)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.warning_message)
+                        .withTheme(NiceToast.THEME_WARNING)
                         .build()
                         .show();
                 break;
             case R.id.activity_demo_btn_error_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.error_message)
-                        .theme(NiceToast.THEME_ERROR)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.error_message)
+                        .withTheme(NiceToast.THEME_ERROR)
                         .build()
                         .show();
                 break;
             case R.id.activity_demo_btn_top_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.top_message)
-                        .position(NiceToast.POSITION_TOP)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.top_message)
+                        .withPosition(NiceToast.POSITION_TOP)
                         .build()
                         .show();
                 break;
             case R.id.activity_demo_btn_middle_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.middle_message)
-                        .position(NiceToast.POSITION_CENTER)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.middle_message)
+                        .withPosition(NiceToast.POSITION_CENTER)
                         .build()
                         .show();
                 break;
             case R.id.activity_demo_btn_long_duration_message:
-                new NiceToast.Builder(getApplicationContext(), R.string.long_duration_message)
-                        .duration(NiceToast.DURATION_LONG)
+                new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.long_duration_message)
+                        .withDuration(NiceToast.DURATION_LONG)
                         .build()
                         .show();
                 break;
