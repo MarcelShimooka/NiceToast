@@ -1,12 +1,12 @@
 /**
  * Copyright (C) 2016 Marcel Shimooka
- * <p>
+ * <p/>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- * <p>
+ * <p/>
  * http://www.apache.org/licenses/LICENSE-2.0
- * <p>
+ * <p/>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -19,7 +19,6 @@ package com.marcelshimooka.nicetoast;
 import android.content.Context;
 import android.support.annotation.IntDef;
 import android.support.annotation.StringRes;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.widget.TextView;
@@ -120,22 +119,22 @@ public class NiceToast extends Toast {
         switch (mTheme) {
             case THEME_DEFAULT:
                 mIconResource = 0;
-                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_default);
+                mTextColorResource = mContext.getResources().getColor(R.color.nice_toast_default);
                 mBackgroundResource = R.drawable.nice_toast_bg_default;
                 break;
             case THEME_SUCCESS:
                 mIconResource = R.drawable.ic_nice_toast_success;
-                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_success);
+                mTextColorResource = mContext.getResources().getColor(R.color.nice_toast_success);
                 mBackgroundResource = R.drawable.nice_toast_bg_success;
                 break;
             case THEME_WARNING:
                 mIconResource = R.drawable.ic_nice_toast_warning;
-                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_warning);
+                mTextColorResource = mContext.getResources().getColor(R.color.nice_toast_warning);
                 mBackgroundResource = R.drawable.nice_toast_bg_warning;
                 break;
             case THEME_ERROR:
                 mIconResource = R.drawable.ic_nice_toast_error;
-                mTextColorResource = ContextCompat.getColor(mContext, R.color.nice_toast_error);
+                mTextColorResource = mContext.getResources().getColor(R.color.nice_toast_error);
                 mBackgroundResource = R.drawable.nice_toast_bg_error;
                 break;
         }

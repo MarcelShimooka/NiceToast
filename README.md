@@ -1,8 +1,40 @@
 Nice Toast
 ============
 
-This is a simple custom Toast library.
+NiceToast provides a simple way to show a custom toast within your apps.
+You can set a theme like "success", "warning" or "error" to show a toast with diferent colors.
 
+## Sample Application
+Check the sample application on Google Play:
+
+[![Get it on Google Play](https://play.google.com/intl/en_us/badges/images/badge_new.png)](https://play.google.com/store/apps/details?id=com.marcelshimooka.example.nicetoast)
+
+## Sample Usage
+``` java
+  new NiceToast.Builder(getApplicationContext())
+                        .withMessage(R.string.success_message)
+                        .withTheme(NiceToast.THEME_SUCCESS)
+                        .withPosition(NiceToast.POSITION_TOP)
+                        .withDuration(NiceToast.DURATION_LONG)
+                        .build()
+                        .show();
+```
+
+Add NiceToast to your project
+----------------------------
+Gradle:
+```gradle
+compile 'com.marcelshimooka.nicetoast:nicetoast:1.0.2'
+```
+
+Maven:
+```xml
+<dependency>
+    <groupId>com.marcelshimooka.nicetoast</groupId>
+    <artifactId>nicetoast</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
 
 #Credits
 - [Marcel Shimooka](https://github.com/MarcelShimooka)
