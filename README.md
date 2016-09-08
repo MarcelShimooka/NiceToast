@@ -2,7 +2,7 @@ Nice Toast
 ============
 
 NiceToast provides a simple way to show a custom toast within your apps.
-You can set a theme like "success", "warning" or "error" to show a toast with diferent colors.
+You can set a theme like "success", "warning" or "error" to show a toast with different colors.
 
 ## Sample Application
 Check the sample application on Google Play:
